@@ -108,6 +108,7 @@ class Sticky extends React.Component {
             }
             boundary = self.getTargetBottom(self.bottomBoundaryTarget);
         }
+        boundary -= self.props.bottomMargin;
         return boundary && boundary > 0 ? boundary : Infinity;
     }
 
@@ -315,7 +316,8 @@ class Sticky extends React.Component {
 Sticky.defaultProps = {
     enabled: true,
     top: 0,
-    bottomBoundary: 0
+    bottomBoundary: 0,
+    bottomMargin: 0
 };
 
 /**
@@ -335,7 +337,8 @@ Sticky.propTypes = {
         propTypes.object,  // TODO, may remove
         propTypes.string,
         propTypes.number
-    ])
+    ]),
+    bottomMargin: propTypes.number
 };
 
 module.exports = Sticky;
