@@ -24,7 +24,6 @@ var doc;
 var docBody;
 var docEl;
 var enableTransforms = true; // Use transform by default, so no Sticky on lower-end browser when no Modernizr
-var M;
 var scrollDelta = 0;
 var scrollTop = -1;
 var win;
@@ -37,12 +36,6 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     docBody = doc.body;
     scrollTop = docBody.scrollTop + docEl.scrollTop;
     winHeight = win.innerHeight || docEl.clientHeight;
-    M = window.Modernizr;
-    // No Sticky on lower-end browser when no Modernizr
-    if (M) {
-        enableTransforms = M.csstransforms3d;
-        TRANSFORM_PROP = M.prefixed('transform');
-    }
 }
 
 class Sticky extends React.Component {
