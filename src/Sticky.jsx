@@ -34,7 +34,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     doc = document;
     docEl = doc.documentElement;
     docBody = doc.body;
-    scrollTop = docBody.scrollTop + docEl.scrollTop;
+    scrollTop = docBody == null ? 0 : docBody.scrollTop + docEl.scrollTop;
     winHeight = win.innerHeight || docEl.clientHeight;
 }
 
