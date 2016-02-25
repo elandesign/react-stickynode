@@ -24,7 +24,6 @@ var doc;
 var docBody;
 var docEl;
 var enableTransforms = true; // Use transform by default, so no Sticky on lower-end browser when no Modernizr
-var M;
 var scrollDelta = 0;
 var scrollTop = -1;
 var win;
@@ -35,14 +34,8 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     doc = document;
     docEl = doc.documentElement;
     docBody = doc.body;
-    scrollTop = docBody.scrollTop + docEl.scrollTop;
+    scrollTop = docBody == null ? 0 : docBody.scrollTop + docEl.scrollTop;
     winHeight = win.innerHeight || docEl.clientHeight;
-    M = window.Modernizr;
-    // No Sticky on lower-end browser when no Modernizr
-    if (M) {
-        enableTransforms = M.csstransforms3d;
-        TRANSFORM_PROP = M.prefixed('transform');
-    }
 }
 
 class Sticky extends React.Component {
@@ -115,6 +108,7 @@ class Sticky extends React.Component {
             }
             boundary = self.getTargetBottom(self.bottomBoundaryTarget);
         }
+        boundary -= self.props.bottomMargin;
         return boundary && boundary > 0 ? boundary : Infinity;
     }
 
@@ -322,7 +316,8 @@ class Sticky extends React.Component {
 Sticky.defaultProps = {
     enabled: true,
     top: 0,
-    bottomBoundary: 0
+    bottomBoundary: 0,
+    bottomMargin: 0
 };
 
 /**
@@ -342,7 +337,8 @@ Sticky.propTypes = {
         propTypes.object,  // TODO, may remove
         propTypes.string,
         propTypes.number
-    ])
+    ]),
+    bottomMargin: propTypes.number
 };
 
 module.exports = Sticky;
